@@ -1,0 +1,144 @@
+<nav class="bg-white sticky top-0 z-10 drop-shadow-2xl">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="{{ url_for('static', filename='assets/images/logos/medetect-logo.svg') }}" class="h-10" alt="navbar-logo">
+        </a>
+
+        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <div class="relative inline-block text-left">
+                <button type="button" class="relative flex rounded-full bg-primary px-4 py-3 duration-200 hover:scale-90 text-white bg-gray-800 text-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="dropdown-button" aria-expanded="false" aria-haspopup="true">
+                    FDA Guidelines
+                </button>
+                <div class="hidden absolute right-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5" id="dropdown-menu">
+                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-button">
+                        <a href="https://www.fda.gov.ph/?s=counterfeit+alaxan" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Guidelines for Brand W</a>
+                        <a href="https://www.fda.gov.ph/?s=counterfeit+bioflu" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Guidelines for Brand X</a>
+                        <a href="https://www.fda.gov.ph/?s=counterfeit+biogesic" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Guidelines for Brand Y</a>
+                        <a href="https://www.fda.gov.ph/?s=counterfeit+neozep" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Guidelines for Brand Z</a>
+                    </div>
+                </div>                
+            </div>
+
+            <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+            <ul class="flex flex-col p-2 md:p-0 mt-2 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-2 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                    <a href="#home" class="transition-all bg-gray-900 hover:bg-#1BA9B5 hover:bg-opacity-50 px-2 py-1 text-sm md:text-base font-medium rounded-md" aria-current="page">Home</a>
+                </li>
+                <li>
+                    <a href="#how-to-use" class="transition-all bg-gray-900 hover:bg-#1BA9B5 hover:bg-opacity-50 px-2 py-1 text-sm md:text-base font-medium rounded-md">How to Use</a>
+                </li>
+                <li>
+                    <a href="#about-us" class="transition-all bg-gray-900 hover:bg-#1BA9B5 hover:bg-opacity-50 px-2 py-1 text-sm md:text-base font-medium rounded-md">About Us</a>
+                </li>
+                <li>
+                    <a href="#contact-us" class="transition-all bg-gray-900 hover:bg-#1BA9B5 hover:bg-opacity-50 px-2 py-1 text-sm md:text-base font-medium rounded-md">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        
+        
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
+        const mobileMenu = document.getElementById('navbar-sticky');
+        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        const menuItems = document.querySelectorAll('#navbar-sticky a');
+        const dropdownLinks = document.querySelectorAll('#dropdown-menu a');
+    
+        function closeMenus() {
+            mobileMenu.classList.add('hidden');
+            dropdownMenu.classList.add('hidden');
+        }
+    
+        function checkMobileView() {
+            if (window.innerWidth <= 768) { // Adjust this breakpoint as needed for your mobile view
+                closeMenus();
+            }
+        }
+    
+        menuButton.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+    
+        dropdownButton.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('hidden');
+        });
+    
+        menuItems.forEach(function (item) {
+            item.addEventListener('click', function () {
+                closeMenus();
+            });
+    
+            // Background color changes on hover
+            item.addEventListener('mouseenter', function () {
+                item.style.backgroundColor = '#1BA9B5';
+                item.style.color = '#FFFFFF';
+            });
+    
+            item.addEventListener('mouseleave', function () {
+                item.style.backgroundColor = '';
+                item.style.color = '';
+            });
+        });
+    
+        dropdownLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+            window.open(link.getAttribute('href'), '_blank');
+            closeMenus();
+        });
+    
+            // Background color changes on hover
+            link.addEventListener('mouseenter', function () {
+                link.style.backgroundColor = '#1BA9B5';
+                link.style.color = '#FFFFFF';
+            });
+    
+            link.addEventListener('mouseleave', function () {
+                link.style.backgroundColor = '';
+                link.style.color = '';
+            });
+        });
+
+        function closeMenus() {
+            dropdownMenu.classList.add('hidden');
+        }
+    
+        // Function to check if the target element is inside a specific element
+        function isDescendantOf(el, parent) {
+            while (el !== null) {
+                if (el === parent) {
+                    return true;
+                }
+                el = el.parentNode;
+            }
+            return false;
+        }
+    
+        // Close dropdowns if clicked outside
+        document.addEventListener('click', function (event) {
+            if (!isDescendantOf(event.target, dropdownButton)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    
+        // Check for mobile view on initial load
+        checkMobileView();
+    
+        // Check for mobile view on window resize
+        window.addEventListener('resize', function () {
+            checkMobileView();
+        });
+    });
+</script>
