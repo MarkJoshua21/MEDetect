@@ -1,21 +1,25 @@
+<!-- Include external JavaScript file for upload functionality -->
 <script
   type="text/javascript"
   src="{{ url_for('static', filename='assets/js/upload.js') }}"
 ></script>
 
+<!-- Inline script to handle form submission and clear file input -->
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function () {
-      // Add an event listener to the form submission
+      // Event listener for the form submission
       document.getElementById('upload-form').addEventListener('submit', function (e) {
-          // Clear the file input after submission
+          // Clear the file input field after submission
           document.getElementById('image').value = '';
       });
   });
 </script>
 
+<!-- Main section container for the upload page -->
 <section id="home" class="grid h-max lg:h-[calc(100vh-64px)] scroll-mt-[64px] place-items-center" style="background: url(&quot;static/assets/images/bg/upload-section-bg.webp&quot;) center center no-repeat;">
   <div id="upload-container" class="mx-auto flex min-h-max w-4/5 flex-col rounded-2xl border-4 border-transparent bg-zinc-50 pb-4 opacity-95 md:h-4/5 lg:max-w-6xl xl:w-full">
     <div id="upload-container-headers" class="mx-auto w-4/5 px-8 pt-8">
+      <!-- Tab buttons for switching between upload and result display -->
       <ul class="flex justify-evenly border-b-2 border-zinc-200 px-8">
         <li class="tab-button pb-2 text-center active" data-form-view="upload-form-one">
             <h5 class="text-primary text-xl font-semibold">Upload Image</h5>
@@ -23,19 +27,23 @@
         </li>
         <li class="tab-button pb-2 text-center" data-form-view="result-form-one">
             <h5 class="text-primary text-xl font-semibold">Check Output</h5>
-            <span class="text-xs">Hooray! Your Result is Here</span>
+            <span class="text-xs">Hooray Your Result is Here</span>
         </li>
       </ul>
     </div>
     
+    <!-- Form for uploading an image -->
     <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data" class="h-max lg:h-full w-full text-sm text-gray-600 grid place-items-center">
       <div id="upload-form-one" class="tab-panel h-full relative grid w-full place-items-center py-8 lg:grid-cols-2">
+        <!-- Hidden div for displaying image preview -->
         <div id="image-preview-container" class="px-6 py-8 hidden w-full grid place-items-center" >
           <img id="image-preview" class="h-[340px] w-full rounded-xl border-2 border-dashed border-zinc-400 object-cover px-3 py-4" src="" alt="image-preview"/>
         </div>
         
+        <!-- Input area for selecting an image file -->
         <div id="image-input-container" class="px-6 py-8 w-full">
           <label id="image-label" for="image" class="py-21 text-secondary transition-transform duration-200 hover:scale-105 focus-within:ring-secondary group relative grid h-[340px] w-full cursor-pointer place-items-center rounded-xl border-2 border-dashed border-zinc-400 bg-white px-16 font-medium text-gray-700 transition-all focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2">
+            <!-- SVG icon for indicating file selection -->
             <div>
               <svg
                 class="fill-secondary group-hover:fill-primary"
@@ -50,7 +58,9 @@
                 />
               </svg>
 
+              <!-- Label text for file selection prompt -->
               <span class="group-hover:text-primary">Upload a file</span>
+              <!-- Hidden file input element -->
               <input
                 required
                 id="image"
@@ -62,8 +72,10 @@
           </label>
         </div>
       
+        <!-- Options for enabling/disabling data augmentation -->
         <div id="upload-options-container" class="mx-auto grid space-y-3 w-4/5 place-items-center py-8 text-justify">
-          <div clas="text-container">
+          <!-- Explanation of data augmentation options -->
+          <div class="text-container">
             <h6 class="text-secondary font-bold">Turn On Augmentation:</h6>
             <p>
               Activating data augmentation enhances and diversifies the image dataset, 
@@ -75,6 +87,7 @@
               examining images directly using original data.
             </p>
           </div>
+          <!-- Checkbox for toggling data augmentation -->
           <label class="border-primary relative mb-5 inline-flex cursor-pointer items-center rounded-md border bg-zinc-50 px-4 py-3 drop-shadow-md">
             <span
               class="mx-3 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -89,79 +102,12 @@
             />
           </label>
 
+          <!-- Submit button for uploading the image -->
           <button
           id="upload-next"
           type="submit"
           class="bg-primary text-md hidden rounded-full flex gap-2 bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+            <!-- SVG spinner for loading state -->
             <svg id="spinner" aria-hidden="true" class="hidden w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-            </svg>
-            <span id="upload-text">
-              Upload
-            </span>
-          </button>
-        </div>
-      </div>
-
-      <div id="result-form-one" class="tab-panel h-full relative grid w-full place-items-center py-8 lg:grid-cols-2 hidden">
-        <!-- Image preview holder -->
-        <div id="result-preview-container" class="px-6 py-8 w-full grid place-items-center">
-          <img id="result-preview" class="h-[340px] w-full rounded-xl border-2 border-dashed border-zinc-400 object-cover px-3 py-4" src="" alt="result-preview" />
-        </div>
-        <!-- Result Text Container -->
-        <div id="result-options-container" class="mx-auto grid w-4/5 place-items-center py-8 text-justify space-y-3">
-          <h6 class="text-secondary font-bold text-">MEDetected:</h6>
-          <p>
-            <span class="text-secondary font-bold text">Authentic</span>: We are pleased to inform you that the medicine you have scanned is authentic and safe for consumption. 
-          </p>
-          <p>
-            <span class="text-rose-500 font-bold text">Counterfeit</span>: We regret to inform you that the medicine you have scanned is counterfeit and may be harmful to your health. We strongly advise you to discard the medicine immediately and report the incident to the FDA. You can contact the FDA by calling <em><strong>(02) 8857-1900</strong></em> or by sending an email to <em><strong><a href="mailto:report@fda.gov.ph", style="color: blue;">report@fda.gov.ph</a></strong></em>.
-          </p>
-          <div>
-            <!-- Upload Again Button -->
-            <button id="upload-again-btn" type="button" class="bg-primary text-md rounded-full bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-              Upload Again
-            </button>
-          </div>
-        </div>
-
-        <div id="result-options-container-2" class="mx-auto grid w-4/5 place-items-center py-8 text-justify space-y-3">
-          <h6 class="text-gray-500 font-bold text-">NO OBJECT DETECTED:</h6>
-          <p>Make sure to follow the following requirements:</p>
-          <ul class="list-disc list-inside">
-            <li>Take a clear picture of the over-the-counter medicine.</li>
-            <li>Avoid too much brightness or darkness in the photo.</li>
-            <li>Make sure nothing blocks the view of the medicines.</li>
-            <li>Keep the camera 3-6 inches away from the medicines.</li>
-            <li>At least 50% of the medicines should be visible.</li>
-            <li>Capture either front, back, and side views of the medicine.</li>
-            <li>The medicine should be either Brand W, X, Y, and Z.</li>
-          </ul>
-          <div>
-          <!-- Upload Again Button -->
-            <button id="upload-again-btn-2" type="button" class="bg-primary text-md rounded-full bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-              Upload Again
-            </button>      
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</section>
-
-<style>
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    #data-aug-button, #result-options-container {
-      margin-bottom: 200px;
-    }
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    #upload-again-btn {
-      margin-top: -340px;
-    }
-  }
-
-</style>
-
+              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124```

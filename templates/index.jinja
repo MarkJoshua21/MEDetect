@@ -1,9 +1,25 @@
+<!-- Include the header partial, typically containing the site logo, navigation links, etc. -->
 {% include 'partials/header.jinja' %}
+
+<!-- Include the navigation bar component, providing access to different sections of the site. -->
 {% include 'components/navbar.jinja' %}
+
+<!-- Container div for the main content of the page. -->
 <div id="scroll-container">
+
+    <!-- Include the upload partial, where users can upload files or perform related actions. -->
     {% include 'partials/upload.jinja' %}
+
+    <!-- Include the how-to-use partial, offering guidance on utilizing the site or its features. -->
     {% include 'partials/how-to-use.jinja' %}
+
+    <!-- Include the about-us partial, providing information about the company or organization. -->
     {% include 'partials/about-us.jinja' %}
+
+    <!-- Include the contact-us partial, offering ways for users to reach out for support or inquiries. -->
     {% include 'partials/contact-us.jinja' %}
+
 </div>
+
+<!-- Include the footer partial, usually containing copyright notices, legal links, and secondary navigation. -->
 {% include 'partials/footer.jinja' %}
